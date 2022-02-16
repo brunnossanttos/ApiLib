@@ -1,26 +1,29 @@
 import AppError from '@shared/errors/AppError';
-import { getCustomRepository } from 'typeorm';
+import { IBook } from '../domain/models/IBook';
 import { ICreateBook } from '../domain/models/ICreateBook';
-import Book from '../infra/typeorm/entities/Book';
-import { BookRepository } from '../infra/typeorm/repositories/BooksRepositories';
+import { IBooksRepository } from '../domain/repositories/IBooksRepository';
+import { injectable, inject } from 'tsyringe';
 
+@injectable()
 class CreateBookService {
-  public async execute({ title, author, pages }: ICreateBook): Promise<Book> {
-    const booksRepository = getCustomRepository(BookRepository);
-    const bookExists = await booksRepository.findByName(title);
+  constructor(
+    @inject('IBooksRepository')
+    private booksRepository: IBooksRepository,
+  ) {}
+
+  public async execute({ title, author, pages }: ICreateBook): Promise<IBook> {
+    const bookExists = await this.booksRepository.findByName(title);
 
     if (bookExists) {
       throw new AppError('There is already one book with this name');
     }
 
-    const book = booksRepository.create({
+    const book = await this.booksRepository.create({
       title,
       author,
       pages,
       status: false,
     });
-
-    await booksRepository.save(await book);
 
     return book;
   }
