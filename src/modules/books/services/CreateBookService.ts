@@ -1,22 +1,11 @@
 import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
-import Book from '../typeorm/entities/Book';
-import { BookRepository } from '../typeorm/repositories/BooksRepository';
-
-interface IRequest {
-  title: string;
-  author: string;
-  pages: number;
-  status: boolean;
-}
+import { ICreateBook } from '../domain/models/ICreateBook';
+import Book from '../infra/typeorm/entities/Book';
+import { BookRepository } from '../infra/typeorm/repositories/BooksRepositories';
 
 class CreateBookService {
-  public async execute({
-    title,
-    author,
-    pages,
-    status,
-  }: IRequest): Promise<Book> {
+  public async execute({ title, author, pages }: ICreateBook): Promise<Book> {
     const booksRepository = getCustomRepository(BookRepository);
     const bookExists = await booksRepository.findByName(title);
 
@@ -28,10 +17,10 @@ class CreateBookService {
       title,
       author,
       pages,
-      status,
+      status: false,
     });
 
-    await booksRepository.save(book);
+    await booksRepository.save(await book);
 
     return book;
   }

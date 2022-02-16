@@ -1,15 +1,8 @@
 import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
-import Book from '../typeorm/entities/Book';
-import { BookRepository } from '../typeorm/repositories/BooksRepository';
-
-interface IRequest {
-  id: string;
-  title: string;
-  author: string;
-  pages: number;
-  status: boolean;
-}
+import { IUpdateBook } from '../domain/models/IUpdateBook';
+import Book from '../infra/typeorm/entities/Book';
+import { BookRepository } from '../infra/typeorm/repositories/BooksRepositories';
 
 class UpdateBookService {
   public async execute({
@@ -18,7 +11,7 @@ class UpdateBookService {
     author,
     pages,
     status,
-  }: IRequest): Promise<Book> {
+  }: IUpdateBook): Promise<Book> {
     const booksRepository = getCustomRepository(BookRepository);
 
     const book = await booksRepository.findOne(id);
