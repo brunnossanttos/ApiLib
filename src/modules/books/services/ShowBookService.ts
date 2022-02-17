@@ -1,17 +1,18 @@
+import { inject, injectable } from 'tsyringe';
 import AppError from '@shared/errors/AppError';
-import { getCustomRepository } from 'typeorm';
-import Book from '../infra/typeorm/entities/Book';
-import { BookRepository } from '../infra/typeorm/repositories/BooksRepositories';
+import { IBooksRepository } from '../domain/repositories/IBooksRepository';
+import { IShowBook } from '../domain/models/IShowBook';
+import { IBook } from '../domain/models/IBook';
 
-interface IRequest {
-  id: string;
-}
-
+@injectable()
 class ShowBookService {
-  public async execute({ id }: IRequest): Promise<Book> {
-    const booksRepository = getCustomRepository(BookRepository);
+  constructor(
+    @inject('BooksRepository')
+    private booksRepository: IBooksRepository,
+  ) {}
 
-    const book = await booksRepository.findOne(id);
+  public async execute({ id }: IShowBook): Promise<IBook> {
+    const book = await this.booksRepository.findById(id);
 
     if (!book) {
       throw new AppError('Book not found.');

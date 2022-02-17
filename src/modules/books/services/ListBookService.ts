@@ -1,25 +1,18 @@
-import { getCustomRepository } from 'typeorm';
-import Book from '../infra/typeorm/entities/Book';
-import { BookRepository } from '../infra/typeorm/repositories/BooksRepositories';
+import { inject, injectable } from 'tsyringe';
+import { IBooksRepository } from '../domain/repositories/IBooksRepository';
+import { IBookPaginate } from '../domain/models/IBookPaginate';
 
-interface IPaginateBook {
-  from: number;
-  to: number;
-  per_page: number;
-  total: number;
-  current_page: number;
-  prev_page: number | null;
-  next_page: number | null;
-  data: Book[];
-}
-
+@injectable()
 class ListBookService {
-  public async execute(): Promise<IPaginateBook> {
-    const booksRepository = getCustomRepository(BookRepository);
+  constructor(
+    @inject('BookRepository')
+    private booksRepository: IBooksRepository,
+  ) {}
 
-    const books = await booksRepository.createQueryBuilder().paginate();
+  public async execute(): Promise<IBookPaginate> {
+    const books = await this.booksRepository.findAllPaginate();
 
-    return books as IPaginateBook;
+    return books;
   }
 }
 

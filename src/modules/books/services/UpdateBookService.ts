@@ -1,8 +1,8 @@
+import { inject, injectable } from 'tsyringe';
 import AppError from '@shared/errors/AppError';
-import { getCustomRepository } from 'typeorm';
 import { IUpdateBook } from '../domain/models/IUpdateBook';
-import Book from '../infra/typeorm/entities/Book';
-import { BookRepository } from '../infra/typeorm/repositories/BooksRepositories';
+import { IBooksRepository } from '../domain/repositories/IBooksRepository';
+import { IBook } from '../domain/models/IBook';
 
 class UpdateBookService {
   public async execute({

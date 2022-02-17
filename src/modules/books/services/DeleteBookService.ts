@@ -1,19 +1,23 @@
 import AppError from '@shared/errors/AppError';
-import { getCustomRepository } from 'typeorm';
 import { IDeleteBook } from '../domain/models/IDeleteBook';
-import { BookRepository } from '../infra/typeorm/repositories/BooksRepositories';
+import { injectable, inject } from 'tsyringe';
+import { IBooksRepository } from '../domain/repositories/IBooksRepository';
 
+@injectable()
 class DeleteBookService {
-  public async execute({ id }: IDeleteBook): Promise<void> {
-    const booksRepository = getCustomRepository(BookRepository);
+  constructor(
+    @inject('BooksRepository')
+    private booksRepository: IBooksRepository,
+  ) {}
 
-    const book = await booksRepository.findOne(id);
+  public async execute({ id }: IDeleteBook): Promise<void> {
+    const book = await this.booksRepository.findById(id);
 
     if (!book) {
       throw new AppError('Book not found.');
     }
 
-    await booksRepository.remove(book);
+    await this.booksRepository.remove(book);
   }
 }
 
