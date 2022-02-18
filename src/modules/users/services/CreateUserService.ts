@@ -3,7 +3,7 @@ import { hash } from 'bcryptjs';
 import { getCustomRepository } from 'typeorm';
 import { ICreateUser } from '../domain/models/ICreateUser';
 import User from '../infra/typeorm/entities/User';
-import UserRepositories from '../infra/typeorm/repositories/UsersRepositories';
+import UserRepositories from '../infra/typeorm/repositories/UsersRepository';
 
 class CreateUserService {
   public async execute({

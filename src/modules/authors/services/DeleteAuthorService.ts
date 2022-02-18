@@ -1,7 +1,7 @@
 import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 import { IDeleteAuthor } from '../domain/models/IDeleteAuthor';
-import { IAuthorRepository } from '../domain/repositories/IAuthorRepository';
+import { IAuthorRepository } from '../domain/repositories/IAuthorsRepository';
 
 @injectable()
 class DeleteAuthorService {

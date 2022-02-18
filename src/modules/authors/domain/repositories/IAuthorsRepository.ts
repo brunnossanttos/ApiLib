@@ -1,4 +1,4 @@
-import Author from '@modules/authors/infra/http/typeorm/entities/Author';
+import Author from '@modules/authors/infra/typeorm/entities/Author';
 import { IAuthor } from '../models/IAuthor';
 import { IAuthorPaginate } from '../models/IAuthorPaginate';
 import { ICreateAuthor } from '../models/ICreateAuthor';

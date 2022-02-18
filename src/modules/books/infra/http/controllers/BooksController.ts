@@ -8,7 +8,7 @@ import { container } from 'tsyringe';
 
 export default class BooksController {
   public async index(request: Request, response: Response): Promise<Response> {
-    const listBooks = new ListBookService();
+    const listBooks = container.resolve(ListBookService);
 
     const books = await listBooks.execute();
 
@@ -18,7 +18,7 @@ export default class BooksController {
   public async show(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
 
-    const showBook = new ShowBookService();
+    const showBook = container.resolve(ShowBookService);
 
     const book = await showBook.execute({ id });
 
@@ -44,7 +44,7 @@ export default class BooksController {
     const { title, author, pages } = request.body;
     const { id } = request.params;
 
-    const updateBook = new UpdateBookService();
+    const updateBook = container.resolve(UpdateBookService);
 
     const book = await updateBook.execute({
       id,
@@ -60,7 +60,7 @@ export default class BooksController {
   public async delete(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
 
-    const deleteBook = new DeleteBookService();
+    const deleteBook = container.resolve(DeleteBookService);
     await deleteBook.execute({ id });
 
     return response.json([]);

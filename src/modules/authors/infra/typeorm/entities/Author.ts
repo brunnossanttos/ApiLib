@@ -8,7 +8,7 @@ import {
 import { Exclude } from 'class-transformer';
 import { IAuthor } from '@modules/authors/domain/models/IAuthor';
 
-@Entity('author')
+@Entity('authors')
 class Author implements IAuthor {
   @PrimaryGeneratedColumn('uuid')
   id: string;

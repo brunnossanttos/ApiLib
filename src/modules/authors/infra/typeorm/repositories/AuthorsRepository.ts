@@ -1,6 +1,6 @@
 import { IAuthorPaginate } from '@modules/authors/domain/models/IAuthorPaginate';
 import { ICreateAuthor } from '@modules/authors/domain/models/ICreateAuthor';
-import { IAuthorRepository } from '@modules/authors/domain/repositories/IAuthorRepository';
+import { IAuthorRepository } from '@modules/authors/domain/repositories/IAuthorsRepository';
 import { getRepository, Repository } from 'typeorm';
 import Author from '../entities/Author';
 

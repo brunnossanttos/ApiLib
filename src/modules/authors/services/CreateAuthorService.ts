@@ -1,13 +1,13 @@
 import AppError from '@shared/errors/AppError';
 import { IAuthor } from '../domain/models/IAuthor';
 import { ICreateAuthor } from '../domain/models/ICreateAuthor';
-import { IAuthorRepository } from '../domain/repositories/IAuthorRepository';
+import { IAuthorRepository } from '../domain/repositories/IAuthorsRepository';
 import { injectable, inject } from 'tsyringe';
 
 @injectable()
 class CreateAuthorService {
   constructor(
-    @inject('IAuthorRepository')
+    @inject('AuthorRepository')
     private authorsRepository: IAuthorRepository,
   ) {}
 

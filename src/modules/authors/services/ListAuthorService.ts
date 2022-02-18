@@ -1,5 +1,5 @@
 import { inject, injectable } from 'tsyringe';
-import { IAuthorRepository } from '../domain/repositories/IAuthorRepository';
+import { IAuthorRepository } from '../domain/repositories/IAuthorsRepository';
 import { IAuthorPaginate } from '../domain/models/IAuthorPaginate';
 
 @injectable()

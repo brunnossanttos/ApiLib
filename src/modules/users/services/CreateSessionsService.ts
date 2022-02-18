@@ -4,7 +4,7 @@ import { sign } from 'jsonwebtoken';
 import authConfig from '@config/auth';
 import { getCustomRepository } from 'typeorm';
 import User from '../infra/typeorm/entities/User';
-import UserRepositories from '../infra/typeorm/repositories/UsersRepositories';
+import UserRepositories from '../infra/typeorm/repositories/UsersRepository';
 import { ICreateSessions } from '../domain/models/ICreateSessions';
 
 interface IResponse {
