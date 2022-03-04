@@ -1,9 +1,9 @@
+import CreateBookService from '@modules/books/services/CreateBookService';
+import DeleteBookService from '@modules/books/services/DeleteBookService';
+import ListBookService from '@modules/books/services/ListBookService';
+import ShowBookService from '@modules/books/services/ShowBookService';
+import UpdateBookService from '@modules/books/services/UpdateBookService';
 import { Request, Response } from 'express';
-import CreateBookService from '../../../services/CreateBookService';
-import DeleteBookService from '../../../services/DeleteBookService';
-import ListBookService from '../../../services/ListBookService';
-import ShowBookService from '../../../services/ShowBookService';
-import UpdateBookService from '../../../services/UpdateBookService';
 import { container } from 'tsyringe';
 
 export default class BooksController {
@@ -20,28 +20,26 @@ export default class BooksController {
 
     const showBook = container.resolve(ShowBookService);
 
-    const book = await showBook.execute({ id });
+    const books = await showBook.execute({ id });
 
-    return response.json(book);
+    return response.json(books);
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
-    const { title, author, pages } = request.body;
+    const { title, author } = request.body;
 
     const createBook = container.resolve(CreateBookService);
 
     const book = await createBook.execute({
       title,
       author,
-      pages,
-      status: false,
     });
 
     return response.json(book);
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
-    const { title, author, pages } = request.body;
+    const { title, author } = request.body;
     const { id } = request.params;
 
     const updateBook = container.resolve(UpdateBookService);
@@ -50,8 +48,6 @@ export default class BooksController {
       id,
       title,
       author,
-      pages,
-      status: false,
     });
 
     return response.json(book);

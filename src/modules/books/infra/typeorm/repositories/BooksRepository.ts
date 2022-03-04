@@ -1,18 +1,18 @@
 import { ICreateBook } from '@modules/books/domain/models/ICreateBook';
+import { IBookPaginate } from '@modules/books/domain/models/IPaginate';
 import { IBooksRepository } from '@modules/books/domain/repositories/IBooksRepository';
 import { getRepository, Repository } from 'typeorm';
 import Book from '../entities/Book';
-import { IBookPaginate } from '@modules/books/domain/models/IBookPaginate';
 
-export class BookRepository implements IBooksRepository {
+export class BooksRepository implements IBooksRepository {
   private ormRepository: Repository<Book>;
 
   constructor() {
     this.ormRepository = getRepository(Book);
   }
 
-  public async create({ title }: ICreateBook): Promise<Book> {
-    const book = this.ormRepository.create({ title });
+  public async create({ title, author }: ICreateBook): Promise<Book> {
+    const book = this.ormRepository.create({ title, author });
 
     await this.ormRepository.save(book);
 
@@ -26,7 +26,7 @@ export class BookRepository implements IBooksRepository {
   }
 
   public async remove(book: Book): Promise<void> {
-    await this.ormRepository.save(book);
+    await this.ormRepository.remove(book);
   }
 
   public async findByName(title: string): Promise<Book | undefined> {
@@ -50,7 +50,7 @@ export class BookRepository implements IBooksRepository {
   }
 
   public async findAll(): Promise<Book[]> {
-    const book = await this.ormRepository.find();
+    const book = this.ormRepository.find();
 
     return book;
   }

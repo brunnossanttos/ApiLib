@@ -1,6 +1,6 @@
 import { IBook } from '../models/IBook';
-import { IBookPaginate } from '../models/IBookPaginate';
 import { ICreateBook } from '../models/ICreateBook';
+import { IBookPaginate } from '../models/IPaginate';
 
 export interface IBooksRepository {
   findByName(title: string): Promise<IBook | undefined>;

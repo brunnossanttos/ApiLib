@@ -1,8 +1,8 @@
-import { inject, injectable } from 'tsyringe';
 import AppError from '@shared/errors/AppError';
-import { IBooksRepository } from '../domain/repositories/IBooksRepository';
-import { IShowBook } from '../domain/models/IShowBook';
+import { inject, injectable } from 'tsyringe';
 import { IBook } from '../domain/models/IBook';
+import { IShowBook } from '../domain/models/IShowBook';
+import { IBooksRepository } from '../domain/repositories/IBooksRepository';
 
 @injectable()
 class ShowBookService {
@@ -15,7 +15,7 @@ class ShowBookService {
     const book = await this.booksRepository.findById(id);
 
     if (!book) {
-      throw new AppError('Book not found.');
+      throw new AppError('Book not found,');
     }
 
     return book;

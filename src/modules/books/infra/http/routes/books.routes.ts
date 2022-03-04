@@ -1,11 +1,12 @@
+import { celebrate, Segments } from 'celebrate';
 import { Router } from 'express';
+import Joi from 'joi';
 import BooksController from '../controllers/BooksController';
-import { celebrate, Joi, Segments } from 'celebrate';
 
 const booksRouter = Router();
-const booksControler = new BooksController();
+const booksController = new BooksController();
 
-booksRouter.get('/', booksControler.index);
+booksRouter.get('/', booksController.index);
 
 booksRouter.get(
   '/:id',
@@ -14,7 +15,7 @@ booksRouter.get(
       id: Joi.string().uuid().required(),
     },
   }),
-  booksControler.show,
+  booksController.show,
 );
 
 booksRouter.post(
@@ -23,10 +24,9 @@ booksRouter.post(
     [Segments.BODY]: {
       title: Joi.string().required(),
       author: Joi.string().required(),
-      pages: Joi.number().required(),
     },
   }),
-  booksControler.create,
+  booksController.create,
 );
 
 booksRouter.put(
@@ -35,15 +35,22 @@ booksRouter.put(
     [Segments.BODY]: {
       title: Joi.string().required(),
       author: Joi.string().required(),
-      pages: Joi.number().required(),
     },
     [Segments.PARAMS]: {
       id: Joi.string().uuid().required(),
     },
   }),
-  booksControler.update,
+  booksController.update,
 );
 
-booksRouter.delete('/:id', booksControler.delete);
+booksRouter.delete(
+  '/:id',
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required(),
+    },
+  }),
+  booksController.delete,
+);
 
 export default booksRouter;
