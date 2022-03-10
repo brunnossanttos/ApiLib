@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { CreateCommentService } from '../../../services/CreateCommentsService';
 import { ListCommentsService } from '../../../services/ListCommentsService';
-//import { Comment } from '../../typeorm/entities/Comment';
+import { instanceToInstance } from 'class-transformer';
 
 export default class CommentsController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -17,7 +17,7 @@ export default class CommentsController {
       comment,
     });
 
-    return response.json(newComment);
+    return response.json(instanceToInstance(newComment));
   }
 
   public async list(request: Request, response: Response): Promise<Response> {
@@ -25,6 +25,6 @@ export default class CommentsController {
 
     const listCommentsService = container.resolve(ListCommentsService);
     const comments = await listCommentsService.execute(book_id);
-    return response.json(comments);
+    return response.json(instanceToInstance(comments));
   }
 }

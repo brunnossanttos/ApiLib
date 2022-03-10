@@ -5,6 +5,7 @@ import ShowUserService from '@modules/users/services/ShowUserService';
 import UpdateUserService from '@modules/users/services/UpdateUserService';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { instanceToInstance } from 'class-transformer';
 
 export default class UsersController {
   public async index(request: Request, response: Response): Promise<Response> {
@@ -12,7 +13,7 @@ export default class UsersController {
 
     const users = await listUsers.execute();
 
-    return response.json(users);
+    return response.json(instanceToInstance(users));
   }
 
   public async show(request: Request, response: Response): Promise<Response> {
@@ -22,7 +23,7 @@ export default class UsersController {
 
     const users = await showUser.execute({ id });
 
-    return response.json(users);
+    return response.json(instanceToInstance(users));
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
@@ -36,11 +37,11 @@ export default class UsersController {
       password,
     });
 
-    return response.json(user);
+    return response.json(instanceToInstance(user));
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
-    const { name, email, password } = request.body;
+    const { name, email, password, old_password } = request.body;
     const { id } = request.params;
 
     const updateUser = container.resolve(UpdateUserService);
@@ -50,9 +51,10 @@ export default class UsersController {
       name,
       email,
       password,
+      old_password,
     });
 
-    return response.json(user);
+    return response.json(instanceToInstance(user));
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {

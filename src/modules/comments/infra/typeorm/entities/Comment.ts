@@ -10,6 +10,7 @@ import {
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Exclude } from 'class-transformer';
 import { v4 as uuid } from 'uuid';
 
 @Entity('books_user_comments')
@@ -21,9 +22,11 @@ class Comment implements IComment {
   comment: string;
 
   @CreateDateColumn()
+  @Exclude()
   created_at: Date;
 
   @UpdateDateColumn()
+  @Exclude()
   updated_at: Date;
 
   @Column()

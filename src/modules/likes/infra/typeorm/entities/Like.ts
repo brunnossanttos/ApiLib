@@ -10,6 +10,7 @@ import {
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Exclude } from 'class-transformer';
 import { v4 as uuid } from 'uuid';
 
 @Entity('user_like')
@@ -21,9 +22,11 @@ class Like implements ILike {
   is_like: boolean;
 
   @CreateDateColumn()
+  @Exclude()
   created_at: Date;
 
   @UpdateDateColumn()
+  @Exclude()
   updated_at: Date;
 
   @Column()

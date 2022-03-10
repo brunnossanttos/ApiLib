@@ -5,6 +5,7 @@ import ShowBookService from '@modules/books/services/ShowBookService';
 import UpdateBookService from '@modules/books/services/UpdateBookService';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { instanceToInstance } from 'class-transformer';
 
 export default class BooksController {
   public async index(request: Request, response: Response): Promise<Response> {
@@ -12,7 +13,7 @@ export default class BooksController {
 
     const books = await listBooks.execute();
 
-    return response.json(books);
+    return response.json(instanceToInstance(books));
   }
 
   public async show(request: Request, response: Response): Promise<Response> {
@@ -22,7 +23,7 @@ export default class BooksController {
 
     const books = await showBook.execute({ id });
 
-    return response.json(books);
+    return response.json(instanceToInstance(books));
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
@@ -35,7 +36,7 @@ export default class BooksController {
       author,
     });
 
-    return response.json(book);
+    return response.json(instanceToInstance(book));
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
@@ -50,7 +51,7 @@ export default class BooksController {
       author,
     });
 
-    return response.json(book);
+    return response.json(instanceToInstance(book));
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {
