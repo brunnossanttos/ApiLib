@@ -6,6 +6,8 @@ import { IUsersRepository } from '@modules/users/domain/repositories/IUsersRepos
 import { UsersRepository } from '@modules/users/infra/typeorm/repositories/UsersRepository';
 import { ILikesRepository } from '@modules/likes/domain/repositories/ILikesRepository';
 import { LikesRepository } from '@modules/likes/infra/typeorm/repositories/LikesRepository';
+import { ICommentsRepository } from '@modules/comments/domain/repositories/ICommentsRepository';
+import { CommentsRepository } from '@modules/comments/infra/typeorm/repositories/CommentsRepository';
 
 container.registerSingleton<IBooksRepository>(
   'BooksRepository',
@@ -19,4 +21,9 @@ container.registerSingleton<IUsersRepository>(
 container.registerSingleton<ILikesRepository>(
   'LikesRepository',
   LikesRepository,
+);
+
+container.registerSingleton<ICommentsRepository>(
+  'CommentsRepository',
+  CommentsRepository,
 );

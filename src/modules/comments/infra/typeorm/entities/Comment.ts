@@ -1,5 +1,5 @@
+import { IComment } from '@modules/comments/domain/models/IComment';
 import { Book } from '@modules/books/infra/typeorm/entities/Book';
-import { ILike } from '@modules/likes/domain/models/ILike';
 import { User } from '@modules/users/infra/typeorm/entities/Users';
 import {
   Column,
@@ -12,13 +12,13 @@ import {
 } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 
-@Entity('user_like')
-class Like implements ILike {
+@Entity('books_user_comments')
+class Comment implements IComment {
   @PrimaryColumn()
   readonly id: string;
 
   @Column()
-  is_like: boolean;
+  comment: string;
 
   @CreateDateColumn()
   created_at: Date;
@@ -28,13 +28,13 @@ class Like implements ILike {
 
   @Column()
   book_id: string;
-  @ManyToOne(() => Book, book => book.likes)
+  @ManyToOne(() => Book, book => book.comments)
   @JoinColumn({ name: 'book_id' })
   book: Book;
 
   @Column()
   user_id: string;
-  @ManyToOne(() => User, user => user.likes)
+  @ManyToOne('users', (user: User) => user.comments)
   @JoinColumn({ name: 'user_id' })
   user: User;
 
@@ -45,4 +45,4 @@ class Like implements ILike {
   }
 }
 
-export { Like };
+export { Comment };

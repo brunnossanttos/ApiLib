@@ -2,7 +2,7 @@ import { ICreateUser } from '@modules/users/domain/models/ICreateUser';
 import { IUserPaginate } from '@modules/users/domain/models/IPaginate';
 import { IUsersRepository } from '@modules/users/domain/repositories/IUsersRepository';
 import { getRepository, Repository } from 'typeorm';
-import User from '../entities/Users';
+import { User } from '../entities/Users';
 
 export class UsersRepository implements IUsersRepository {
   private ormRepository: Repository<User>;

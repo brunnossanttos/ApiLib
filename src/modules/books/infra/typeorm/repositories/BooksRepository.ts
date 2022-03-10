@@ -2,7 +2,7 @@ import { ICreateBook } from '@modules/books/domain/models/ICreateBook';
 import { IBookPaginate } from '@modules/books/domain/models/IPaginate';
 import { IBooksRepository } from '@modules/books/domain/repositories/IBooksRepository';
 import { getRepository, Repository } from 'typeorm';
-import Book from '../entities/Book';
+import { Book } from '../entities/Book';
 
 export class BooksRepository implements IBooksRepository {
   private ormRepository: Repository<Book>;

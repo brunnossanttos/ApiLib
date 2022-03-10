@@ -1,3 +1,4 @@
+import { Comment } from '@modules/comments/infra/typeorm/entities/Comment';
 import { Like } from '@modules/likes/infra/typeorm/entities/Like';
 import {
   Column,
@@ -30,6 +31,9 @@ class User {
 
   @OneToMany(() => Like, like => like.book)
   likes: Like[];
+
+  @OneToMany(() => Comment, comment => comment.user_id)
+  comments: Comment[];
 }
 
-export default User;
+export { User };
