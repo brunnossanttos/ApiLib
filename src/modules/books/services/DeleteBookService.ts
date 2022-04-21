@@ -1,6 +1,6 @@
 import AppError from '@shared/errors/AppError';
+import { inject, injectable } from 'tsyringe';
 import { IDeleteBook } from '../domain/models/IDeleteBook';
-import { injectable, inject } from 'tsyringe';
 import { IBooksRepository } from '../domain/repositories/IBooksRepository';
 
 @injectable()

@@ -1,39 +1,31 @@
-import { inject, injectable } from 'tsyringe';
 import AppError from '@shared/errors/AppError';
+import { inject, injectable } from 'tsyringe';
+import { IBook } from '../domain/models/IBook';
 import { IUpdateBook } from '../domain/models/IUpdateBook';
 import { IBooksRepository } from '../domain/repositories/IBooksRepository';
-import { IBook } from '../domain/models/IBook';
 
 @injectable()
 class UpdateBookService {
   constructor(
-    @inject('ProductsRepository')
+    @inject('BooksRepository')
     private booksRepository: IBooksRepository,
   ) {}
 
-  public async execute({
-    id,
-    title,
-    author,
-    pages,
-    status,
-  }: IUpdateBook): Promise<IBook> {
+  public async execute({ id, title, author }: IUpdateBook): Promise<IBook> {
     const book = await this.booksRepository.findById(id);
 
     if (!book) {
       throw new AppError('Book not found.');
     }
 
-    const bookExists = await this.booksRepository.findByName(title);
+    /* const booksExists = await this.booksRepository.findByName(title);
 
-    if (bookExists) {
+    if (booksExists) {
       throw new AppError('There is already one book with this name');
-    }
+    } */
 
     book.title = title;
     book.author = author;
-    book.pages = pages;
-    book.status = status;
 
     await this.booksRepository.save(book);
 

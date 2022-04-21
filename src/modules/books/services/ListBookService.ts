@@ -1,11 +1,11 @@
 import { inject, injectable } from 'tsyringe';
+import { IBookPaginate } from '../domain/models/IPaginate';
 import { IBooksRepository } from '../domain/repositories/IBooksRepository';
-import { IBookPaginate } from '../domain/models/IBookPaginate';
 
 @injectable()
 class ListBookService {
   constructor(
-    @inject('BookRepository')
+    @inject('BooksRepository')
     private booksRepository: IBooksRepository,
   ) {}
 

@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+import 'dotenv/config';
 import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
 import { errors } from 'celebrate';
@@ -7,8 +8,11 @@ import AppError from '@shared/errors/AppError';
 import routes from './routes';
 import '@shared/infra/typeorm';
 import '@shared/container';
+import cors from 'cors';
 
 const app = express();
+
+app.use(cors);
 app.use(express.json());
 
 app.use(pagination);

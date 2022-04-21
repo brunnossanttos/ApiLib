@@ -1,15 +1,17 @@
-import { Exclude } from 'class-transformer';
+import { Comment } from '@modules/comments/infra/typeorm/entities/Comment';
+import { Like } from '@modules/likes/infra/typeorm/entities/Like';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { IBook } from '@modules/books/domain/models/IBook';
+import { Exclude } from 'class-transformer';
 
 @Entity('books')
-class Book implements IBook {
+class Book {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -19,12 +21,6 @@ class Book implements IBook {
   @Column()
   author: string;
 
-  @Column('int')
-  pages: number;
-
-  @Column()
-  status: boolean;
-
   @CreateDateColumn()
   @Exclude()
   created_at: Date;
@@ -32,6 +28,12 @@ class Book implements IBook {
   @UpdateDateColumn()
   @Exclude()
   updated_at: Date;
+
+  @OneToMany(() => Like, like => like.book)
+  likes: Like[];
+
+  @OneToMany(() => Comment, comment => comment.book)
+  comments: Comment[];
 }
 
-export default Book;
+export { Book };
