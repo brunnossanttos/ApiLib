@@ -1,8 +1,8 @@
-import CreateUserService from '@modules/users/services/CreateUserService';
-import DeleteUserService from '@modules/users/services/DeleteUserService';
-import ListUserService from '@modules/users/services/ListUserService';
-import ShowUserService from '@modules/users/services/ShowUserService';
-import UpdateUserService from '@modules/users/services/UpdateUserService';
+import CreateUserService from '../../../../../modules/users/services/CreateUserService';
+import DeleteUserService from '../../../../../modules/users/services/DeleteUserService';
+import ListUserService from '../../../../../modules/users/services/ListUserService';
+import ShowUserService from '../../../../../modules/users/services/ShowUserService';
+import UpdateUserService from '../../../../../modules/users/services/UpdateUserService';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { instanceToInstance } from 'class-transformer';

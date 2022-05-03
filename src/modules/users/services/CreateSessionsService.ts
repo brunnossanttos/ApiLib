@@ -1,7 +1,7 @@
 import AppError from '@shared/errors/AppError';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
-import authConfig from '@config/auth';
+import authConfig from '../../../config/auth';
 import { ICreateSessions } from '../domain/models/ICreateSessions';
 import { inject, injectable } from 'tsyringe';
 import { IUsersRepository } from '../domain/repositories/IUsersRepository';

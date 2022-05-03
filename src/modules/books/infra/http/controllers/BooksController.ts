@@ -1,8 +1,8 @@
-import CreateBookService from '@modules/books/services/CreateBookService';
-import DeleteBookService from '@modules/books/services/DeleteBookService';
-import ListBookService from '@modules/books/services/ListBookService';
-import ShowBookService from '@modules/books/services/ShowBookService';
-import UpdateBookService from '@modules/books/services/UpdateBookService';
+import CreateBookService from '../../../../../modules/books/services/CreateBookService';
+import DeleteBookService from '../../../../../modules/books/services/DeleteBookService';
+import ListBookService from '../../../../../modules/books/services/ListBookService';
+import ShowBookService from '../../../../../modules/books/services/ShowBookService';
+import UpdateBookService from '../../../../../modules/books/services/UpdateBookService';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { instanceToInstance } from 'class-transformer';

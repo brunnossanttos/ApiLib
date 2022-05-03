@@ -1,5 +1,5 @@
-import { CountLikesService } from '@modules/likes/services/CountLikeService';
-import { HandleLikesService } from '@modules/likes/services/HandleLikesService';
+import { CountLikesService } from '../../../../../modules/likes/services/CountLikeService';
+import { HandleLikesService } from '../../../../../modules/likes/services/HandleLikesService';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { instanceToInstance } from 'class-transformer';

@@ -1,7 +1,7 @@
 import isAuthenticated from '@shared/infra/http/middlewares/isAthenticated';
 import { celebrate, Segments, Joi } from 'celebrate';
 import { Router } from 'express';
-import CommentsController from '@modules/comments/infra/http/controllers/CommentsController';
+import CommentsController from '../../../../../modules/comments/infra/http/controllers/CommentsController';
 
 const commentsRouter = Router();
 const commentsController = new CommentsController();

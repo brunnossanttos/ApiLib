@@ -1,0 +1,87 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API de cadastro de livros",
+    "description": "Essa API tem como objetivo cadastrar livros do usuário",
+    "termsOfService": "http://localhost:3333/terms",
+    "contact": {
+      "email": "brunossrodgers@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3333",
+      "description": "API de test"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "post": {
+        "summary": "Cadastro de Usuário",
+        "description": "Essa rota é responsável por cadastrar um novo usuário",
+        "tags": ["Users"],
+        "security": [{"bearerAuth": []}],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Users"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "name": "Bruno Santos",
+                    "email": "brunosantos@email.com",
+                    "password": "bruno321"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Email address already used."
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "#ref": "#/components/schemas/Users"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Users": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
